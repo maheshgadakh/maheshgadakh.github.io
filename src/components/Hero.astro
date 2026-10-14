@@ -96,7 +96,7 @@
     text-align: left;
     width: 100%;
     /* Anton typography scaled to navbar width */
-    --hero-fs: clamp(4rem, calc(90vw * 0.3145), 380px);
+    --hero-fs: clamp(3.8rem, calc(85.5vw * 0.3145), 361px);
     --ls-first: calc(var(--hero-fs) * 0.0127);
     --ls-last: calc(var(--hero-fs) * 0.0432);
     line-height: 0.78;
@@ -105,9 +105,9 @@
   @media (min-width: 1320px) {
     .hero-name-wrapper {
       /* Fixed container inner width: 1320px - 112px padding = 1208px. */
-      --hero-fs: 380px;
-      --ls-first: 4.83px;
-      --ls-last: 16.4px;
+      --hero-fs: 361px;
+      --ls-first: 4.59px;
+      --ls-last: 15.58px;
     }
   }
 
@@ -233,7 +233,7 @@
     .hero-name-wrapper {
       align-items: center;
       text-align: center;
-      --hero-fs: clamp(5.2rem, 25vw, 6.8rem);
+      --hero-fs: clamp(4.9rem, 23.75vw, 6.45rem);
       padding-inline: 0.75rem;
     }
 
@@ -278,7 +278,7 @@
     }
 
     .hero-name-wrapper {
-      --hero-fs: clamp(4.6rem, 24vw, 5.8rem);
+      --hero-fs: clamp(4.35rem, 22.8vw, 5.5rem);
     }
 
     .hero-portrait-img {
@@ -333,7 +333,7 @@
     if (targetWidth <= 0) return;
 
     // Anton font metrics: MAHESH ratio 3.102656, GADAKH ratio 2.92
-    const fs = Math.min(targetWidth / 3.102656, 380);
+    const fs = Math.min(targetWidth / 3.102656, 380) * 0.95;
     const lsFirst = Math.max(0, (targetWidth - fs * 3.102656) / 6);
     const lsLast = Math.max(0, (targetWidth - fs * 2.92) / 6);
 
