@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  site: 'https://maheshgadakh.pages.dev',
+  site: 'https://maheshgadakh.github.io',
   server: {
     port: 4321,
     host: 'localhost',
