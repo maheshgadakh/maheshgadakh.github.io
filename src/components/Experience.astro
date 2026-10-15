@@ -2,28 +2,56 @@
 // Experience.astro
 const experiences = [
   {
-    company: "Chimera Technologies",
-    role: "Consultant",
-    period: "April 2026 – Present",
-    location: "Bengaluru, India",
+    company: "Xpheno Pvt Ltd",
+    role: "Customer Research Data Architect",
+    period: "September 2026 – Present",
+    location: "Pune, India",
     isCurrent: true,
-    summary: "Leading an enterprise Customer Data Platform (CDP) implementation for a global pharmaceutical client. Architecting Customer 360, identity resolution strategies, and omnichannel campaign enablement."
+    summary: [
+      "Design scalable data architecture connecting CRM platforms with cloud data warehouses, data hubs, and Oracle systems to support a unified customer view.",
+      "Define enterprise data models and lead end-to-end integration strategies, including batch, API-based, and event-driven patterns.",
+      "Guide ETL/ELT pipeline design and establish data governance, quality, and security standards.",
+      "Partner with business stakeholders and engineering teams to translate requirements into solutions, support MDM, and address complex integration challenges."
+    ]
   },
   {
-    company: "Infocepts",
-    role: "Senior Executive, Senior CDP Engineer",
+    company: "Chimera Technologies Pvt Ltd",
+    role: "Consultant | Lead CDP Engineer",
+    period: "April 2026 – August 2026",
+    location: "Bengaluru, India",
+    isCurrent: false,
+    summary: [
+      "Lead an enterprise Treasure Data CDP implementation for a global pharmaceutical client, partnering with business and marketing stakeholders to shape scalable solutions.",
+      "Drive Customer 360 and identity resolution across online and offline data sources.",
+      "Define audience segmentation, customer data models, governance standards, and campaign activation strategies.",
+      "Recommend data-led approaches to strengthen customer acquisition, retention, engagement, and campaign outcomes."
+    ]
+  },
+  {
+    company: "Infocepts Pvt Ltd",
+    role: "Senior Executive | Senior CDP Engineer",
     period: "October 2024 – March 2026",
     location: "Pune, India",
     isCurrent: false,
-    summary: "Integrated multi-source marketing data into Treasure Data CDP. Built master audience segments and activation workflows across Klaviyo, AMC, SFMC, Pipedrive, and Oracle Eloqua."
+    summary: [
+      "Integrated multi-source marketing data into Treasure Data CDP and supported unified customer profiles.",
+      "Built audience segmentation and activation workflows across Salesforce Marketing Cloud, Pipedrive, and Oracle Eloqua.",
+      "Automated workflows with SQL and Python, supported campaign analysis, and partnered with stakeholders on segmentation and activation requirements.",
+      "Used Git, GitHub, CI/CD, and Agile practices to support collaborative development and deployment."
+    ]
   },
   {
-    company: "Course5 Intelligence",
-    role: "Senior Analyst, Senior Data Engineer",
+    company: "Course5 Intelligence Pvt Ltd",
+    role: "Senior Analyst | Senior Data Engineer",
     period: "January 2022 – October 2024",
     location: "Mumbai, India",
     isCurrent: false,
-    summary: "Designed and optimized large-scale ETL pipelines using Python and SQL, cutting processing duration from 6–7 hours down to 2.5 hours. Automated cloud data workflows on AWS and Azure."
+    summary: [
+      "Designed and optimized Python and SQL ETL pipelines supporting CDP solutions, reducing processing time from 6–7 hours to approximately 2.5 hours.",
+      "Integrated data from Klaviyo, Amazon Marketing Cloud, Salesforce Marketing Cloud, and Amazon DSP into Treasure Data CDP; developed customer data models for segmentation and analytics.",
+      "Automated cloud data workflows using AWS S3/EC2 and Azure Data Factory/Data Lake Storage.",
+      "Partnered with data science teams on predictive analytics and supported customer journey, campaign measurement, and attribution use cases."
+    ]
   }
 ];
 ---
@@ -53,10 +81,12 @@ const experiences = [
           <div class="timeline-content-col">
             <div class="company-header">
               <h3 class="company-name">{item.company}</h3>
-              <span class="role-location">{item.location}</span>
+              {item.location && <span class="role-location">{item.location}</span>}
             </div>
             <div class="role-title">{item.role}</div>
-            <p class="role-summary">{item.summary}</p>
+            <ul class="role-summary">
+              {item.summary.map((point) => <li>{point}</li>)}
+            </ul>
           </div>
         </article>
       ))}
@@ -218,5 +248,11 @@ const experiences = [
     line-height: 1.6;
     color: var(--color-text-secondary);
     max-width: 680px;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+
+  .role-summary li + li {
+    margin-top: 0.5rem;
   }
 </style>

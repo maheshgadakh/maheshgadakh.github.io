@@ -1,0 +1,190 @@
+---
+const certifications = [
+  {
+    name: "Treasure AI Expert: CDP for Data Management",
+    issuer: "Treasure AI",
+    issued: "May 2026",
+    expires: "May 2028",
+    credentialId: "182641435",
+    href: "https://certificates.treasure.ai/2277d92a-fa02-4881-a6f4-1da6a188e0e9",
+    status: "Active"
+  },
+  {
+    name: "Treasure AI Expert: CDP for Marketing",
+    issuer: "Treasure AI",
+    issued: "May 2026",
+    expires: "May 2028",
+    credentialId: "182640399",
+    href: "https://certificates.treasure.ai/537f67bc-25b0-4cfa-98b9-614cf8afcd0b",
+    status: "Active"
+  },
+  {
+    name: "Treasure AI Expert: AI/ML Specialist",
+    issuer: "Treasure AI",
+    issued: "Aug 2026",
+    expires: "Aug 2028",
+    credentialId: "192085058",
+    href: "https://certificates.treasure.ai/8b45a026-e721-4a13-a549-4f702649fcf5",
+    status: "Active"
+  },
+  {
+    name: "Treasure AI Expert: AI Agent Foundry",
+    issuer: "Treasure AI",
+    issued: "Jun 2026",
+    expires: "Jun 2028",
+    credentialId: "185346064",
+    href: "https://certificates.treasure.ai/dd5e92eb-02a7-4a9e-a45e-0632962e1250",
+    status: "Active"
+  },
+  {
+    name: "Microsoft Certified: Azure Data Engineer Associate",
+    issuer: "Microsoft",
+    issued: "Feb 2024",
+    expires: "Feb 2025",
+    credentialId: "98E713372172C56C",
+    href: "https://learn.microsoft.com/api/credentials/share/en-us/MaheshGadakh-2982/98E713372172C56C?sharingId",
+    status: "Expired"
+  },
+  {
+    name: "Microsoft Certified: Dynamics 365 Customer Insights (Data) Specialty",
+    issuer: "Microsoft",
+    issued: "May 2023",
+    expires: "May 2025",
+    credentialId: "E5E696D9FAA5C0D6",
+    href: "https://learn.microsoft.com/api/credentials/share/en-us/MaheshGadakh-2982/E5E696D9FAA5C0D6?sharingId",
+    status: "Expired"
+  },
+];
+---
+
+<section id="certifications" class="certifications-section" aria-label="Certifications">
+  <div class="container">
+    <div class="section-eyebrow">05 / CERTIFICATIONS</div>
+    <h2 class="section-heading">Credentials that count.</h2>
+
+    <ul class="certifications-list">
+      {certifications.map((certification, index) => (
+        <li class={`certification-card ${certification.status === "Expired" ? "expired" : ""}`}>
+          <span class="certification-index">{String(index + 1).padStart(2, "0")}</span>
+          <div class="certification-details">
+            <h3 class="certification-name">{certification.name}</h3>
+            <p class="certification-issuer">{certification.issuer}</p>
+            <p class="certification-date">Issued {certification.issued} · Expires {certification.expires}</p>
+            {certification.credentialId && <p class="certification-id">Credential ID: {certification.credentialId}</p>}
+            <span class="certification-status">{certification.status}</span>
+            <a class="certification-link" href={certification.href} target="_blank" rel="noopener noreferrer">
+              View credential <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .certifications-section {
+    padding: var(--section-spacing-y) 0;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .certifications-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .certification-card {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border-subtle);
+    background-color: var(--color-surface);
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .certification-card:hover {
+    border-color: var(--color-border-red);
+    transform: translateY(-2px);
+  }
+
+  .certification-card.expired {
+    border-color: var(--color-border-subtle);
+  }
+
+  .certification-index {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-red);
+  }
+
+  .certification-name {
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .certification-issuer {
+    margin-top: 0.35rem;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .certification-date,
+  .certification-id {
+    margin-top: 0.5rem;
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .certification-status {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.2rem 0.45rem;
+    border: 1px solid var(--color-border-red);
+    color: var(--color-red);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .certification-card.expired .certification-status {
+    border-color: var(--color-border-subtle);
+    color: var(--color-text-muted);
+  }
+
+  .certification-link {
+    display: block;
+    width: fit-content;
+    margin-top: 0.85rem;
+    color: var(--color-red);
+    font-size: 0.8125rem;
+    text-decoration: none;
+  }
+
+  .certification-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .certifications-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .certification-card {
+      align-items: start;
+      min-height: 230px;
+      padding: 1.5rem;
+    }
+  }
+</style>
