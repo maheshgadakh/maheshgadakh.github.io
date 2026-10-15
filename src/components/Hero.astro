@@ -87,13 +87,13 @@
     width: 100%;
   }
 
-  /* .hero-name-wrapper extends .container (max-width 1320px, same padding as nav). */
+  /* Center the oversized name within the same content grid as the navigation. */
   .hero-name-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;   /* left-align to container left edge (= logo edge) */
+    align-items: center;
     justify-content: center;
-    text-align: left;
+    text-align: center;
     width: 100%;
     /* Anton typography scaled to navbar width */
     --hero-fs: clamp(3.8rem, calc(85.5vw * 0.3145), 361px);

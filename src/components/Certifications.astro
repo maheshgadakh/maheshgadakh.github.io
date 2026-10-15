@@ -114,14 +114,25 @@ const certifications = [
     transform: translateY(-2px);
   }
 
+  .certification-card:focus-within {
+    border-color: var(--color-border-red);
+    transform: translateY(-2px);
+  }
+
   .certification-card.expired {
     border-color: var(--color-border-subtle);
+  }
+
+  .certification-card.expired:hover,
+  .certification-card.expired:focus-within {
+    border-color: var(--color-border-red);
+    transform: translateY(-2px);
   }
 
   .certification-index {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
-    color: var(--color-red);
+    color: var(--color-red-text);
   }
 
   .certification-name {
@@ -151,7 +162,7 @@ const certifications = [
     margin-top: 0.75rem;
     padding: 0.2rem 0.45rem;
     border: 1px solid var(--color-border-red);
-    color: var(--color-red);
+    color: var(--color-red-text);
     font-family: var(--font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.08em;
@@ -167,13 +178,23 @@ const certifications = [
     display: block;
     width: fit-content;
     margin-top: 0.85rem;
-    color: var(--color-red);
+    color: var(--color-red-text);
     font-size: 0.8125rem;
     text-decoration: none;
   }
 
   .certification-link:hover {
     text-decoration: underline;
+  }
+
+  .certification-link span {
+    display: inline-block;
+    transition: transform var(--transition-fast);
+  }
+
+  .certification-link:hover span,
+  .certification-link:focus-visible span {
+    transform: translate(2px, -2px);
   }
 
   @media (min-width: 768px) {

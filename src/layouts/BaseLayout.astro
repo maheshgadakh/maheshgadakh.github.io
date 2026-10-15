@@ -44,6 +44,16 @@ const ogImageURL = new URL("/images/Red-Rimmed%20Monochrome%20Portrait.png", can
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImageURL} />
 
+    <script is:inline>
+      try {
+        const savedTheme = localStorage.getItem("portfolio-theme");
+        document.documentElement.dataset.theme = savedTheme === "dark" ? "dark" : "light";
+      } catch (error) {
+        console.warn("Could not read the saved theme preference.", error);
+        document.documentElement.dataset.theme = "light";
+      }
+    </script>
+
     <!-- Preload Critical Assets (LCP Optimization) -->
     <!-- Local Bebas Neue & Anton: preloaded so hero font is available immediately on first paint with zero swap/flash -->
     <link rel="preload" href="/fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin />

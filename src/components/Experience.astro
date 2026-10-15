@@ -164,6 +164,18 @@ const experiences = [
     border-radius: 50%;
     background-color: var(--color-red);
     box-shadow: 0 0 8px var(--color-red);
+    animation: current-role-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes current-role-pulse {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 8px var(--color-red);
+    }
+    50% {
+      opacity: 0.65;
+      box-shadow: 0 0 2px var(--color-red);
+    }
   }
 
   /* Timeline Node */
@@ -239,7 +251,7 @@ const experiences = [
   .role-title {
     font-size: 1.0625rem;
     font-weight: 600;
-    color: #FFFFFF;
+    color: var(--color-text-primary);
     margin-bottom: 0.5rem;
   }
 
