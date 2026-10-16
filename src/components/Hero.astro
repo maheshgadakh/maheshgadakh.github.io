@@ -18,7 +18,7 @@
 
   <!-- Central Monochrome Portrait (z-index: 3, Red-Rimmed Monochrome Portrait) -->
   <img
-    src="/images/Red-Rimmed%20Monochrome%20Portrait.png"
+    src="/images/Red-Rimmed%20Monochrome%20Portrait.webp"
     alt="Mahesh Gadakh - Customer Data Platform Specialist and Data Engineer"
     class="hero-portrait-img"
     fetchpriority="high"
@@ -300,10 +300,13 @@
    *    and without any artificial max clamp.
    */
   function adjustHeroTypography() {
+    const typeContainer = document.querySelector('.hero-type-container') as HTMLElement | null;
+
     if (window.innerWidth < 768) {
       const wrapper = document.querySelector('.hero-name-wrapper') as HTMLElement | null;
       const first = document.getElementById('hero-title-first') as HTMLElement | null;
       const last = document.getElementById('hero-title-last') as HTMLElement | null;
+      typeContainer?.style.removeProperty('top');
       if (wrapper) wrapper.style.removeProperty('--hero-fs');
       if (first) first.style.removeProperty('letter-spacing');
       if (last) last.style.removeProperty('letter-spacing');
@@ -313,13 +316,15 @@
     const wrapper = document.querySelector('.hero-name-wrapper') as HTMLElement | null;
     const first = document.getElementById('hero-title-first') as HTMLElement | null;
     const last = document.getElementById('hero-title-last') as HTMLElement | null;
+    const heroSection = document.getElementById('hero');
+    const header = document.getElementById('site-header');
     const logo = document.querySelector('.brand-logo') as HTMLElement | null;
     const contact = document.querySelector('.nav-list .nav-item:last-child a') as HTMLElement | null;
 
-    if (!wrapper || !first || !last) return;
+    if (!wrapper || !first || !last || !typeContainer || !heroSection) return;
 
     let targetWidth: number;
-    if (logo && contact) {
+    if (logo && contact && contact.getClientRects().length > 0) {
       const logoRect = logo.getBoundingClientRect();
       const contactRect = contact.getBoundingClientRect();
       targetWidth = contactRect.right - logoRect.left;
@@ -333,13 +338,44 @@
     if (targetWidth <= 0) return;
 
     // Anton font metrics: MAHESH ratio 3.102656, GADAKH ratio 2.92
-    const fs = Math.min(targetWidth / 3.102656, 380) * 0.95;
-    const lsFirst = Math.max(0, (targetWidth - fs * 3.102656) / 6);
-    const lsLast = Math.max(0, (targetWidth - fs * 2.92) / 6);
+    let fs = Math.min(targetWidth / 3.102656, 380) * 0.95;
+    let lsFirst = Math.max(0, (targetWidth - fs * 3.102656) / 6);
+    let lsLast = Math.max(0, (targetWidth - fs * 2.92) / 6);
 
-    wrapper.style.setProperty('--hero-fs', `${fs}px`);
-    first.style.setProperty('letter-spacing', `${lsFirst}px`);
-    last.style.setProperty('letter-spacing', `${lsLast}px`);
+    const applyTypography = () => {
+      wrapper.style.setProperty('--hero-fs', `${fs}px`);
+      first.style.setProperty('letter-spacing', `${lsFirst}px`);
+      last.style.setProperty('letter-spacing', `${lsLast}px`);
+    };
+
+    typeContainer.style.top = '50%';
+    applyTypography();
+
+    const heroRect = heroSection.getBoundingClientRect();
+    const headerBottom = Math.max(0, (header?.getBoundingClientRect().bottom ?? 0) - heroRect.top);
+    const safeTop = headerBottom + 16;
+    const safeBottom = heroRect.height - 24;
+    let firstRect = first.getBoundingClientRect();
+    let lastRect = last.getBoundingClientRect();
+    let titleHeight = lastRect.bottom - firstRect.top;
+    const availableHeight = safeBottom - safeTop;
+
+    if (titleHeight > availableHeight && availableHeight > 0) {
+      const scale = availableHeight / titleHeight;
+      fs *= scale;
+      lsFirst *= scale;
+      lsLast *= scale;
+      applyTypography();
+      firstRect = first.getBoundingClientRect();
+      lastRect = last.getBoundingClientRect();
+    }
+
+    const firstTop = firstRect.top - heroRect.top;
+    const lastBottom = lastRect.bottom - heroRect.top;
+    const minimumShift = safeTop - firstTop;
+    const maximumShift = safeBottom - lastBottom;
+    const shift = Math.min(maximumShift, Math.max(minimumShift, 0));
+    typeContainer.style.top = `calc(50% + ${shift}px)`;
   }
 
   // Double rAF ensures DOM and font layout are committed before fine-tuning
